@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hóa 12 • Chương 4 Polymer</title>
+<style>
+:root{--navy:#112d43;--green:#087d75;--mint:#dff4ed;--ink:#193248;--muted:#526b7b;--line:#d6e2e6;--paper:#f3f7f7;--red:#ac283d}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.55 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #dc9300;outline-offset:3px}button{border:0;border-radius:12px;padding:12px 20px;font-weight:700}.primary{background:var(--green);color:#fff}.secondary{background:#e6eef1;color:var(--navy)}.danger{background:var(--red);color:white}.hidden,[hidden]{display:none!important}.wrap{max-width:1280px;margin:auto;padding:0 30px}.brand{background:var(--navy);color:white}.brand .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:18px;padding-bottom:18px}.school{font-size:14px;letter-spacing:.06em;text-transform:uppercase}.teacher{font-size:15px;color:#bedcdd}.logo{font-size:22px;font-weight:800;letter-spacing:.08em}.hero{background:var(--navy);color:white;padding:42px 0 74px;position:relative;overflow:hidden}.hero:after{content:'(–CH₂–CH₂–)ₙ';font-size:clamp(28px,5vw,68px);position:absolute;right:4%;bottom:4px;color:#ffffff17;font-weight:750;pointer-events:none}.eyebrow{font-size:14px;text-transform:uppercase;letter-spacing:.14em;color:#9cddcf;font-weight:750}h1{font-size:clamp(38px,5vw,62px);line-height:1.1;margin:14px 0 16px;letter-spacing:-.04em}h2{font-size:27px;line-height:1.3;margin:0 0 14px}h3{margin:0 0 10px;font-size:21px}.hero p{max-width:680px;color:#d6e5eb;margin:0}.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.stats span{border:1px solid #ffffff35;border-radius:30px;padding:7px 16px;font-size:15px}.entry{max-width:1020px;margin:-28px auto 35px;position:relative;padding:0 24px}.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 10px 35px #17354808}.entry-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field.full{grid-column:1/-1}.field label{display:block;font-size:15px;font-weight:750;margin-bottom:5px}.field input{width:100%;border:1px solid #a5bbc4;border-radius:10px;padding:11px 13px;color:var(--ink);background:#fbfdfd}.rules{padding:0 0 0 22px;margin:10px 0 20px}.rules li{margin:8px 0}.small{font-size:14px;color:var(--muted)}.check{display:flex;align-items:flex-start;gap:10px;margin:22px 0;font-size:16px}.check input{width:20px;height:20px;margin-top:4px;flex:none;accent-color:var(--green)}.error{color:var(--red);font-weight:650;margin:12px 0}.notice{border-left:4px solid var(--green);padding:10px 14px;background:#eef8f4;font-size:15px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:26px;margin-top:28px;margin-bottom:55px}.toolbar{position:sticky;top:0;z-index:3;background:white;border-bottom:1px solid var(--line);box-shadow:0 3px 15px #1735480b}.toolbar .wrap{display:flex;justify-content:space-between;gap:20px;align-items:center;padding-top:12px;padding-bottom:12px}.timer{font-size:28px;font-variant-numeric:tabular-nums;font-weight:800;color:var(--green)}.timer.urgent{color:var(--red)}.timerlabel{font-size:12px;color:var(--muted)}.person{font-size:15px}.live{color:var(--green);font-size:13px;font-weight:750}.question{background:white;border:1px solid var(--line);border-radius:18px;padding:25px;margin-bottom:20px;scroll-margin-top:110px}.qtop{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);margin-bottom:12px}.qnum{font-size:14px;background:var(--navy);color:white;padding:4px 10px;border-radius:7px;font-weight:750}.stem{font-size:19px;line-height:1.65;margin:0 0 17px;font-weight:600}.options{display:grid;gap:10px}.option{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--line);border-radius:12px;padding:12px 15px;cursor:pointer;transition:background .12s,border-color .12s}.option:hover{background:#f0f8f7}.option:has(input:checked){background:#e6f6ef;border-color:var(--green)}.option input{margin:6px 0 0;width:18px;height:18px;accent-color:var(--green);flex:none}.letter{font-weight:800;min-width:22px}.option.correct{background:#e1f5e9!important;border-color:#27934d}.option.wrong{background:#fff0f0!important;border-color:#bd4351}.explain{margin-top:16px;border-top:1px dashed var(--line);padding-top:14px;font-size:16px}.explain strong{color:var(--green)}.aside{position:sticky;top:108px;align-self:start}.aside .panel{padding:20px;border-radius:16px}.nav{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:15px 0}.nav button{padding:8px 0;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font-size:14px}.nav button.answered{background:var(--green);color:#fff;border-color:var(--green)}.nav button.bad{background:#fff0f0;color:#a32940;border-color:#d7a1aa}.nav button.good{background:#e1f5e9;color:#176f37;border-color:#8ecda4}.progress{height:7px;background:#e5edef;border-radius:8px;overflow:hidden;margin:12px 0}.progress div{height:100%;background:var(--green);transition:width .2s}.submitwide{width:100%;margin-top:15px}.summary{margin:28px auto 0}.resultgrid{display:grid;grid-template-columns:160px 1fr;gap:28px;align-items:center}.score{width:150px;height:150px;border-radius:50%;border:10px solid #b9e4d5;display:flex;flex-direction:column;align-items:center;justify-content:center}.score b{font-size:44px;line-height:1.1;color:var(--green)}.score small{font-size:15px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.result-reason{font-weight:650;color:var(--red)}footer{text-align:center;font-size:13px;color:var(--muted);padding:22px}.overlay{position:fixed;inset:0;background:#0c253abd;z-index:10;display:flex;align-items:center;justify-content:center;padding:24px}.dialog{width:min(500px,100%);background:white;padding:30px;border-radius:20px}.dialog .actions{justify-content:flex-end}.log{font-size:14px;color:var(--muted);margin-top:14px}.quiet{background:transparent;border:1px solid var(--line);color:var(--ink);font-size:14px}.endnote{font-size:15px;color:var(--muted);text-align:center;margin:28px}.section-label{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+@media(max-width:1000px){.entry-grid{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.aside{position:static;grid-row:1}.aside .nav{grid-template-columns:repeat(10,1fr)}.wrap{padding:0 18px}.question{padding:20px}.hero{padding-top:28px}.brand .wrap{align-items:flex-start}.teacher{text-align:right}.toolbar .wrap{flex-wrap:wrap}.resultgrid{grid-template-columns:1fr}.score{margin:auto}}
+@media print{.brand,.hero,#entry,.toolbar,.aside,.actions,footer,.overlay,.endnote{display:none!important}.layout{display:block;margin:0}.wrap{padding:0;max-width:none}.question{break-inside:avoid;box-shadow:none;border-radius:0}.summary{margin-top:0}.panel{box-shadow:none}.explain[hidden]{display:none!important}body{font-size:12pt;background:white}.stem{font-size:12pt}.question input{display:none}}
+</style></head><body>
+<header class="brand"><div class="wrap"><div><div class="school">Trường THPT Lê Hồng Phong</div><div class="logo">HÓA HỌC 12</div></div><div class="teacher">Giáo viên giảng dạy<br><strong>PHAN NGỌC ANH</strong></div></div></header>
+<section class="hero" id="hero"><div class="wrap"><div class="eyebrow">Ôn tập chương 4 • Kết nối tri thức</div><h1>Polymer</h1><p>Từ cấu trúc phân tử đến vật liệu trong cuộc sống.<br>40 câu hỏi giúp hệ thống kiến thức và luyện suy luận.</p><div class="stats"><span>40 câu nhiều lựa chọn</span><span>45 phút</span><span>0,25 điểm / câu</span><span>Thang điểm 10</span></div></div></section>
+<main>
+<div class="entry" id="entry"><div class="panel"><div class="entry-grid"><section><div class="section-label">Chuẩn bị trước khi bắt đầu</div><h2>Thông tin học sinh</h2><form id="startForm"><div class="formgrid"><div class="field full"><label for="name">Họ và tên *</label><input id="name" required maxlength="100" autocomplete="name" placeholder="Nhập họ và tên"></div><div class="field"><label for="className">Lớp *</label><input id="className" required maxlength="30" placeholder="Ví dụ: 12A1"></div><div class="field"><label for="studentId">Số báo danh</label><input id="studentId" maxlength="40" placeholder="Không bắt buộc"></div></div><label class="check"><input id="agree" type="checkbox" required><span>Tôi đã đọc quy định và đồng ý tự nộp bài ngay khi xảy ra các thao tác được nêu bên cạnh.</span></label><button type="submit" class="primary" id="startBtn">Vào toàn màn hình và bắt đầu →</button><p id="error" class="error" role="alert" hidden></p></form></section><section><div class="section-label">Quy định làm bài</div><h2>Giữ nguyên màn hình làm bài</h2><ul class="rules"><li>Dùng <strong>máy tính với Chrome hoặc Edge</strong>; đóng các cửa sổ nổi trước khi bắt đầu.</li><li>Chuyển tab, chuyển sang ứng dụng khác, thoát toàn màn hình hoặc thay đổi kích thước vùng làm bài sẽ <strong>tự nộp ngay</strong>.</li><li>Chia đôi màn hình làm mất toàn màn hình hoặc đổi kích thước cũng bị tự nộp. Không thu phóng trang khi đang làm bài.</li><li>Tải lại hoặc rời trang trong lúc làm sẽ kết thúc lượt làm hiện tại. Hết 45 phút, bài được tự nộp.</li></ul><p class="notice">Hãy hoàn tất thao tác chỉnh màn hình trước khi bắt đầu. Đáp án chỉ hiện sau khi nộp.</p><details class="small"><summary>Giới hạn giám sát và lưu kết quả</summary><p>File HTML kiểm tra sự kiện của trình duyệt, không khóa được hệ điều hành hay phát hiện thiết bị thứ hai. Chia màn hình không gây sự kiện có thể không được nhận biết. Mã nguồn và dữ liệu trên máy có thể bị can thiệp; đây không phải hệ thống thi bảo mật tuyệt đối. Kết quả chỉ lưu trên trình duyệt đang dùng, không tự gửi về giáo viên.</p></details></section></div></div></div>
+<div id="toolbar" class="toolbar" hidden><div class="wrap"><div><div class="person" id="person"></div><div class="live" id="statusText">● Đang làm bài trong chế độ toàn màn hình</div></div><div><div class="timerlabel">THỜI GIAN CÒN LẠI</div><div class="timer" id="timer">45:00</div></div><button class="primary" id="submitTop">Nộp bài</button></div></div>
+<section class="wrap summary" id="result" hidden aria-live="polite"><div class="panel"><div class="resultgrid"><div class="score"><b id="score">0</b><small>/ 10 điểm</small></div><div><div class="eyebrow" style="color:var(--green)">Kết quả lượt làm</div><h2 id="resultTitle">Đã nộp bài</h2><p id="resultPerson"></p><p id="resultStats"></p><p class="result-reason" id="reason"></p><div class="actions"><button class="primary" id="download">Tải kết quả JSON</button><button class="secondary" id="print">In kết quả và lời giải</button><button class="quiet" id="newAttempt">Bắt đầu lượt ôn tập mới</button></div><p class="small">Giữ file kết quả để gửi cho giáo viên khi được yêu cầu. Lời giải nằm dưới từng câu.</p><details class="log"><summary>Thông tin kết thúc lượt làm</summary><div id="eventLog"></div></details></div></div></div></section>
+<div class="wrap layout" id="exam" hidden><div><div class="section-label" id="questionHeading">Chọn một phương án đúng cho mỗi câu</div><form id="answerForm"><div id="questions"></div></form><div class="endnote">Bạn đã đến cuối bộ câu hỏi. Kiểm tra các câu chưa chọn trước khi nộp.</div></div><aside class="aside"><div class="panel"><h3>Phiếu trả lời</h3><div class="small" id="answeredText">Đã chọn 0 / 40 câu</div><div class="progress"><div id="progressBar" style="width:0%"></div></div><nav class="nav" id="nav" aria-label="Đi đến câu hỏi"></nav><p class="small" id="legend">Ô xanh: đã chọn đáp án.</p><button class="primary submitwide" id="submitSide">Nộp bài</button><p class="small" id="saveHint">Tự lưu sau mỗi lần chọn đáp án.</p></div></aside></div>
+</main><footer>Hóa học 12 • Chương 4 Polymer • Bộ câu hỏi ôn tập tự chấm</footer>
+<div id="confirm" class="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="confirmTitle"><div class="dialog"><h2 id="confirmTitle">Nộp bài ngay?</h2><p id="confirmText"></p><div class="actions"><button class="secondary" id="cancel">Tiếp tục làm</button><button class="primary" id="confirmSubmit">Xác nhận nộp</button></div></div></div>
+<script id="examData" type="application/json">[
+  {
+    "id": 1,
+    "text": "Polymer là những hợp chất có đặc điểm nào sau đây?",
+    "options": [
+      "Đều tan tốt trong nước ở nhiệt độ thường.",
+      "Phân tử khối lớn, do nhiều mắt xích liên kết với nhau.",
+      "Chỉ được tạo thành từ các nguyên tố C và H.",
+      "Phân tử khối nhỏ, chỉ gồm một nguyên tố."
+    ],
+    "answer": 1,
+    "explanation": "Polymer có phân tử khối lớn, gồm nhiều đơn vị nhỏ lặp lại gọi là mắt xích.",
+    "topic": "Đại cương polymer",
+    "level": "Biết"
+  },
+  {
+    "id": 2,
+    "text": "Mắt xích của polyethylene (PE) là",
+    "options": [
+      "–CH₂–CHCl–.",
+      "–CH₂–CH₂–.",
+      "–CH₂–CH(C₆H₅)–.",
+      "–CH₂–CH(CH₃)–."
+    ],
+    "answer": 1,
+    "explanation": "PE được tạo từ ethylene CH₂=CH₂, có mắt xích –CH₂–CH₂–.",
+    "topic": "Đại cương polymer",
+    "level": "Biết"
+  },
+  {
+    "id": 3,
+    "text": "Monomer dùng để điều chế polypropylene (PP) bằng phản ứng trùng hợp là",
+    "options": [
+      "CH₂=CH₂.",
+      "CH₂=CH–C₆H₅.",
+      "CH₂=CHCl.",
+      "CH₂=CH–CH₃."
+    ],
+    "answer": 3,
+    "explanation": "Propylene CH₂=CH–CH₃ trùng hợp tạo PP.",
+    "topic": "Đại cương polymer",
+    "level": "Biết"
+  },
+  {
+    "id": 4,
+    "text": "Polymer nào sau đây là polymer thiên nhiên?",
+    "options": [
+      "Cellulose.",
+      "Poly(vinyl chloride).",
+      "Polystyrene.",
+      "Polyethylene."
+    ],
+    "answer": 0,
+    "explanation": "Cellulose có sẵn trong thực vật; PE, PVC và PS là polymer tổng hợp.",
+    "topic": "Đại cương polymer",
+    "level": "Biết"
+  },
+  {
+    "id": 5,
+    "text": "Phản ứng trùng hợp là quá trình",
+    "options": [
+      "chuyển chất dẻo thành các phân tử khí bằng nhiệt.",
+      "phân cắt polymer thành các monomer.",
+      "kết hợp nhiều monomer thành polymer mà không tách các phân tử nhỏ.",
+      "kết hợp monomer thành polymer đồng thời luôn giải phóng H₂O."
+    ],
+    "answer": 2,
+    "explanation": "Trùng hợp kết hợp nhiều monomer thành polymer, không kèm tách phân tử nhỏ.",
+    "topic": "Đại cương polymer",
+    "level": "Biết"
+  },
+  {
+    "id": 6,
+    "text": "Dấu hiệu phân biệt phản ứng trùng ngưng với phản ứng trùng hợp là",
+    "options": [
+      "Có sự giải phóng phân tử nhỏ khi tạo polymer.",
+      "Luôn cần monomer có liên kết đôi C=C.",
+      "Luôn tạo polymer chỉ chứa C và H.",
+      "Luôn chỉ dùng duy nhất một loại monomer."
+    ],
+    "answer": 0,
+    "explanation": "Trùng ngưng tạo polymer đồng thời giải phóng phân tử nhỏ như H₂O.",
+    "topic": "Đại cương polymer",
+    "level": "Biết"
+  },
+  {
+    "id": 7,
+    "text": "Chất nào có thể tham gia phản ứng trùng hợp tạo polymer theo liên kết đôi C=C?",
+    "options": [
+      "CH₃CH₂Cl.",
+      "CH₂=CHCl.",
+      "CH₃CH₂OH.",
+      "CH₃CH₃."
+    ],
+    "answer": 1,
+    "explanation": "Vinyl chloride có liên kết đôi C=C, trùng hợp tạo PVC.",
+    "topic": "Đại cương polymer",
+    "level": "Biết"
+  },
+  {
+    "id": 8,
+    "text": "Monomer nào sau đây có thể tự trùng ngưng để tạo polyamide?",
+    "options": [
+      "CH₃–CH₂–OH.",
+      "H₂N–(CH₂)₅–COOH.",
+      "CH₃–CH₂–NH₂.",
+      "CH₃–CH₂–COOH."
+    ],
+    "answer": 1,
+    "explanation": "Amino acid H₂N–(CH₂)₅–COOH có cả nhóm –NH₂ và –COOH tạo liên kết amide.",
+    "topic": "Đại cương polymer",
+    "level": "Biết"
+  },
+  {
+    "id": 9,
+    "text": "Nylon-6,6 được điều chế bằng phản ứng trùng ngưng giữa",
+    "options": [
+      "CH₂=CH–CH=CH₂ và CH₂=CH–C₆H₅.",
+      "CH₂=CH₂ và CH₂=CHCl.",
+      "H₂N–(CH₂)₆–NH₂ và HOOC–(CH₂)₄–COOH.",
+      "HO–CH₂–CH₂–OH và HOOC–C₆H₄–COOH."
+    ],
+    "answer": 2,
+    "explanation": "Hexamethylenediamine và adipic acid tạo nylon-6,6; cặp diol–diacid thơm tạo PET.",
+    "topic": "Đại cương polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 10,
+    "text": "Trong một mẫu polymer thông thường, phát biểu nào sau đây phù hợp?",
+    "options": [
+      "Mọi phân tử luôn có cùng một số mắt xích.",
+      "Phân tử khối polymer luôn bằng phân tử khối monomer.",
+      "Số mắt xích của mỗi phân tử luôn bằng 1.",
+      "Các phân tử có thể có số mắt xích khác nhau."
+    ],
+    "answer": 3,
+    "explanation": "Một mẫu polymer thường gồm nhiều phân tử có độ dài mạch khác nhau.",
+    "topic": "Đại cương polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 11,
+    "text": "Phát biểu nào đúng về tính chất vật lí thường gặp của polymer?",
+    "options": [
+      "Thường là chất rắn, không bay hơi.",
+      "Đều tan tốt trong nước.",
+      "Đều có một nhiệt độ nóng chảy xác định như chất tinh khiết phân tử nhỏ.",
+      "Đều có tính dẫn điện tốt như kim loại."
+    ],
+    "answer": 0,
+    "explanation": "Polymer thường ở thể rắn và không bay hơi; tính tan và tính chất cơ học rất đa dạng.",
+    "topic": "Đại cương polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 12,
+    "text": "Nhựa nhiệt dẻo có đặc điểm nào sau đây?",
+    "options": [
+      "Không thay đổi cơ tính ở mọi nhiệt độ.",
+      "Sau khi đóng rắn luôn nóng chảy lại hoàn toàn như ban đầu.",
+      "Chỉ gồm các phân tử nhỏ, không có mạch polymer.",
+      "Mềm ra khi đun nóng và có thể tạo hình lại trong điều kiện thích hợp."
+    ],
+    "answer": 3,
+    "explanation": "Nhựa nhiệt dẻo có thể mềm ra khi gia nhiệt và rắn lại khi nguội trong điều kiện phù hợp.",
+    "topic": "Đại cương polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 13,
+    "text": "Polymer thường dùng làm lớp chống dính trên dụng cụ nấu ăn là",
+    "options": [
+      "Poly(vinyl chloride) (PVC).",
+      "Polytetrafluoroethylene (PTFE).",
+      "Polyacrylonitrile (PAN).",
+      "Nylon-6,6."
+    ],
+    "answer": 1,
+    "explanation": "PTFE thường được dùng làm lớp phủ chống dính; phải sử dụng đúng giới hạn của sản phẩm.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 14,
+    "text": "Monomer tạo polystyrene (PS) là",
+    "options": [
+      "CF₂=CF₂.",
+      "CH₂=CH–CN.",
+      "CH₂=C(CH₃)–COOCH₃.",
+      "CH₂=CH–C₆H₅."
+    ],
+    "answer": 3,
+    "explanation": "Styrene CH₂=CH–C₆H₅ trùng hợp tạo PS.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 15,
+    "text": "Poly(methyl methacrylate) (PMMA) thường được sử dụng để chế tạo",
+    "options": [
+      "sợi bông tự nhiên.",
+      "cao su thiên nhiên thô.",
+      "thủy tinh hữu cơ trong suốt.",
+      "tơ tằm tự nhiên."
+    ],
+    "answer": 2,
+    "explanation": "PMMA có độ trong suốt cao, dùng làm thủy tinh hữu cơ.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 16,
+    "text": "Tơ nào sau đây thuộc loại tơ tổng hợp?",
+    "options": [
+      "Tơ bông.",
+      "Tơ nylon-6,6.",
+      "Tơ tằm.",
+      "Tơ len."
+    ],
+    "answer": 1,
+    "explanation": "Nylon-6,6 là tơ tổng hợp; bông, tằm, len là các loại tơ thiên nhiên.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 17,
+    "text": "Tơ visco được xếp vào loại",
+    "options": [
+      "tơ nhân tạo từ polymer thiên nhiên.",
+      "tơ vô cơ từ oxide kim loại.",
+      "tơ tổng hợp từ monomer vinyl.",
+      "tơ thiên nhiên lấy trực tiếp từ động vật."
+    ],
+    "answer": 0,
+    "explanation": "Visco là tơ nhân tạo được chế biến từ cellulose, một polymer thiên nhiên.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 18,
+    "text": "Tơ nitron (olon) được sản xuất từ polymer nào?",
+    "options": [
+      "Poly(vinyl chloride).",
+      "Polyacrylonitrile.",
+      "Polystyrene.",
+      "Polyethylene."
+    ],
+    "answer": 1,
+    "explanation": "Tơ nitron được làm từ polyacrylonitrile (PAN), có monomer CH₂=CH–CN.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 19,
+    "text": "Tơ bông có thành phần polymer chính là",
+    "options": [
+      "polyisoprene.",
+      "protein.",
+      "cellulose.",
+      "polyamide tổng hợp."
+    ],
+    "answer": 2,
+    "explanation": "Sợi bông có thành phần chính là cellulose.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 20,
+    "text": "Cấu trúc chính của cao su thiên nhiên là",
+    "options": [
+      "cis-1,4-polyisoprene.",
+      "poly(vinyl chloride).",
+      "polyacrylonitrile.",
+      "polyethylene mạch thẳng."
+    ],
+    "answer": 0,
+    "explanation": "Cao su thiên nhiên có cấu trúc chính là cis-1,4-polyisoprene.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 21,
+    "text": "Lưu hóa cao su bằng sulfur tạo ra sự thay đổi chủ yếu nào?",
+    "options": [
+      "Loại bỏ hoàn toàn carbon khỏi cao su.",
+      "Chuyển mọi liên kết đơn thành liên kết ba.",
+      "Thủy phân toàn bộ mạch thành monomer.",
+      "Tạo các cầu nối sulfur giữa các mạch polymer."
+    ],
+    "answer": 3,
+    "explanation": "Các cầu nối sulfur làm tăng liên kết giữa các mạch, giúp cải thiện độ bền và tính đàn hồi.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 22,
+    "text": "Cao su buna-S được điều chế bằng đồng trùng hợp buta-1,3-diene với",
+    "options": [
+      "styrene.",
+      "acrylonitrile.",
+      "methyl methacrylate.",
+      "vinyl chloride."
+    ],
+    "answer": 0,
+    "explanation": "Buna-S là sản phẩm đồng trùng hợp buta-1,3-diene và styrene.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 23,
+    "text": "Cao su buna-N được điều chế bằng đồng trùng hợp buta-1,3-diene với",
+    "options": [
+      "acrylonitrile.",
+      "tetrafluoroethylene.",
+      "ethylene.",
+      "styrene."
+    ],
+    "answer": 0,
+    "explanation": "Buna-N là sản phẩm đồng trùng hợp buta-1,3-diene và acrylonitrile.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 24,
+    "text": "Vật liệu composite thường gồm",
+    "options": [
+      "chỉ một loại khí được nén.",
+      "một kim loại tinh khiết duy nhất.",
+      "vật liệu nền và vật liệu cốt.",
+      "chỉ các phân tử monomer tự do."
+    ],
+    "answer": 2,
+    "explanation": "Composite kết hợp nền và cốt để khai thác ưu điểm của các thành phần.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 25,
+    "text": "Trong composite sợi thủy tinh dùng nhựa epoxy làm nền, vai trò chủ yếu của sợi thủy tinh là",
+    "options": [
+      "làm monomer để trùng hợp ethylene.",
+      "thay thế toàn bộ vật liệu nền.",
+      "gia cường độ bền cơ học.",
+      "đóng vai trò dung môi hòa tan nhựa."
+    ],
+    "answer": 2,
+    "explanation": "Sợi thủy tinh là vật liệu cốt, có tác dụng gia cường.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 26,
+    "text": "Nhựa poly(phenol formaldehyde) đã đóng rắn với cấu trúc mạng không gian có tính chất nào?",
+    "options": [
+      "Khó nóng chảy để tạo hình lại bằng nhiệt.",
+      "Dễ nóng chảy lại nhiều lần như PE.",
+      "Chuyển ngay thành phenol khi để ngoài không khí.",
+      "Tan hoàn toàn trong nước lạnh."
+    ],
+    "answer": 0,
+    "explanation": "Cấu trúc mạng không gian của nhựa nhiệt rắn cản trở sự nóng chảy và tạo hình lại.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 27,
+    "text": "Thủy phân hoàn toàn tinh bột tạo glucose là phản ứng",
+    "options": [
+      "tăng mạch polymer.",
+      "giữ nguyên chiều dài mạch polymer.",
+      "cắt mạch polymer.",
+      "đồng trùng hợp."
+    ],
+    "answer": 2,
+    "explanation": "Liên kết glycoside bị cắt, làm giảm chiều dài mạch cho đến khi tạo glucose.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 28,
+    "text": "Trong điều kiện thích hợp, hydrogen cộng vào liên kết C=C của polybuta-1,3-diene mà không bẻ gãy mạch carbon. Đây là phản ứng",
+    "options": [
+      "cắt mạch polymer.",
+      "tạo mạng bằng cầu sulfur.",
+      "giữ nguyên mạch polymer.",
+      "trùng ngưng tạo polyamide."
+    ],
+    "answer": 2,
+    "explanation": "Phản ứng làm thay đổi liên kết trong mắt xích nhưng giữ nguyên bộ khung mạch carbon.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 29,
+    "text": "Polymer nào sau đây có thể bị thủy phân làm cắt mạch tại liên kết amide?",
+    "options": [
+      "Polyethylene.",
+      "Polystyrene.",
+      "Polytetrafluoroethylene.",
+      "Nylon-6,6."
+    ],
+    "answer": 3,
+    "explanation": "Nylon-6,6 chứa liên kết –CO–NH– trong mạch chính, có thể bị thủy phân.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 30,
+    "text": "Poly(ethylene terephthalate) (PET) được điều chế từ ethylene glycol và terephthalic acid. Liên kết đặc trưng trong mạch chính PET là",
+    "options": [
+      "liên kết peptide.",
+      "liên kết ion.",
+      "liên kết glycoside.",
+      "liên kết ester."
+    ],
+    "answer": 3,
+    "explanation": "Nhóm –OH của diol và –COOH của diacid tạo liên kết ester trong PET.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 31,
+    "text": "Để giảm rác thải nhựa trong sinh hoạt, biện pháp phù hợp nhất là",
+    "options": [
+      "Thay toàn bộ dụng cụ dùng bền bằng túi nhựa mỏng.",
+      "Trộn rác nhựa với thức ăn thừa để dễ tái chế.",
+      "Giảm đồ nhựa dùng một lần, tái sử dụng đúng cách và phân loại thu gom.",
+      "Đốt mọi loại nhựa trong sân nhà."
+    ],
+    "answer": 2,
+    "explanation": "Giảm phát sinh, tái sử dụng đúng hướng dẫn và phân loại hỗ trợ thu gom, tái chế.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 32,
+    "text": "Khi lựa chọn hộp nhựa để đựng thực phẩm nóng, cách làm phù hợp là",
+    "options": [
+      "Dùng sản phẩm được ghi rõ phù hợp thực phẩm và nhiệt độ sử dụng.",
+      "Dùng hộp đã biến dạng do nhiệt để tiết kiệm.",
+      "Dùng bất kì hộp nhựa nào vì mọi polymer đều chịu nhiệt như nhau.",
+      "Chỉ căn cứ vào màu sắc của hộp."
+    ],
+    "answer": 0,
+    "explanation": "Tính chất polymer và phụ gia khác nhau; cần tuân theo mục đích và giới hạn nhiệt độ của sản phẩm.",
+    "topic": "Vật liệu polymer",
+    "level": "Hiểu"
+  },
+  {
+    "id": 33,
+    "text": "Một mẫu PE có phân tử khối trung bình 280 000. Mắt xích –CH₂–CH₂– có M = 28. Bỏ qua nhóm cuối mạch, hệ số polymer hóa trung bình là",
+    "options": [
+      "20 000.",
+      "5 000.",
+      "1 000.",
+      "10 000."
+    ],
+    "answer": 3,
+    "explanation": "n̄ = 280 000/28 = 10 000.",
+    "topic": "Vận dụng số liệu",
+    "level": "Vận dụng"
+  },
+  {
+    "id": 34,
+    "text": "Một mẫu PS có phân tử khối trung bình 104 000. Mỗi mắt xích có công thức C₈H₈. Cho C = 12, H = 1. Hệ số polymer hóa trung bình là",
+    "options": [
+      "1 000.",
+      "500.",
+      "2 000.",
+      "10 000."
+    ],
+    "answer": 0,
+    "explanation": "M(mắt xích) = 8×12+8 = 104; n̄ = 104 000/104 = 1 000.",
+    "topic": "Vận dụng số liệu",
+    "level": "Vận dụng"
+  },
+  {
+    "id": 35,
+    "text": "PVC có mắt xích C₂H₃Cl. Cho C = 12, H = 1, Cl = 35,5. Bỏ qua nhóm cuối mạch, phần trăm khối lượng chlorine trong PVC gần nhất với",
+    "options": [
+      "43,2%.",
+      "56,8%.",
+      "35,5%.",
+      "71,0%."
+    ],
+    "answer": 1,
+    "explanation": "M(mắt xích) = 62,5; %Cl = 35,5/62,5×100 = 56,8%.",
+    "topic": "Vận dụng số liệu",
+    "level": "Vận dụng"
+  },
+  {
+    "id": 36,
+    "text": "Trùng hợp ethylene tạo PE với hiệu suất 80,0% theo khối lượng ethylene ban đầu. Để thu 800 kg PE cần ít nhất bao nhiêu kg ethylene?",
+    "options": [
+      "800 kg.",
+      "1 200 kg.",
+      "640 kg.",
+      "1 000 kg."
+    ],
+    "answer": 3,
+    "explanation": "Trùng hợp không tách phân tử nhỏ: m(ethylene) = 800/0,80 = 1 000 kg.",
+    "topic": "Vận dụng số liệu",
+    "level": "Vận dụng"
+  },
+  {
+    "id": 37,
+    "text": "Sản xuất PET từ 166 kg terephthalic acid tinh khiết và ethylene glycol dư. Cho M(acid) = 166, M(mắt xích PET) = 192. Hiệu suất theo acid là 80,0%; bỏ qua nhóm cuối mạch. Khối lượng PET thu được là",
+    "options": [
+      "240,0 kg.",
+      "192,0 kg.",
+      "153,6 kg.",
+      "132,8 kg."
+    ],
+    "answer": 2,
+    "explanation": "166 kg acid ứng với 1 kmol; m(PET) = 1×192×0,80 = 153,6 kg.",
+    "topic": "Vận dụng số liệu",
+    "level": "Vận dụng"
+  },
+  {
+    "id": 38,
+    "text": "Điều chế 2,26 kg nylon-6,6 từ hexamethylenediamine (M = 116) và adipic acid dư. M(mắt xích nylon-6,6) = 226; hiệu suất theo diamine 80,0%. Bỏ qua nhóm cuối mạch. Khối lượng diamine tối thiểu cần dùng là",
+    "options": [
+      "1,16 kg.",
+      "1,45 kg.",
+      "0,928 kg.",
+      "2,90 kg."
+    ],
+    "answer": 1,
+    "explanation": "n(mắt xích) = 2260/226 = 10 mol; m(diamine) = 10×116/0,80 = 1450 g.",
+    "topic": "Vận dụng số liệu",
+    "level": "Vận dụng"
+  },
+  {
+    "id": 39,
+    "text": "Polybuta-1,3-diene có mắt xích –CH₂–CH=CH–CH₂– (M = 54). Giả sử mỗi liên kết đôi cộng tối đa 1 phân tử Br₂. Khối lượng Br₂ tối đa cộng vào 5,40 g polymer là bao nhiêu? Cho Br = 80, bỏ qua nhóm cuối mạch.",
+    "options": [
+      "32,0 g.",
+      "5,4 g.",
+      "8,0 g.",
+      "16,0 g."
+    ],
+    "answer": 3,
+    "explanation": "Có 5,40/54 = 0,10 mol mắt xích, tức 0,10 mol C=C; m(Br₂) = 0,10×160 = 16,0 g.",
+    "topic": "Vận dụng số liệu",
+    "level": "Vận dụng"
+  },
+  {
+    "id": 40,
+    "text": "Một mẫu cao su thiên nhiên có phân tử khối trung bình 68 000. Mắt xích polyisoprene có công thức C₅H₈. Cho C = 12, H = 1. Bỏ qua nhóm cuối mạch, số mắt xích trung bình trong một phân tử là",
+    "options": [
+      "2 000.",
+      "1 000.",
+      "500.",
+      "10 000."
+    ],
+    "answer": 1,
+    "explanation": "M(mắt xích) = 5×12+8 = 68; n̄ = 68 000/68 = 1 000.",
+    "topic": "Vận dụng số liệu",
+    "level": "Vận dụng"
+  }
+]</script>
+<script>
+'use strict';
+const QUESTIONS=JSON.parse(document.getElementById('examData').textContent);
+const KEY='hoa12-polymer-40-v1',DURATION=45*60*1000;
+const $=id=>document.getElementById(id);
+let state=null,armed=false,starting=false,interval=null,baseline=null,returnFocus=null;
+const reasons={manual:'Bạn đã chủ động nộp bài.',timeout:'Hết thời gian làm bài.',hidden:'Trang làm bài bị ẩn hoặc chuyển sang tab khác.',blur:'Cửa sổ làm bài mất tiêu điểm hoặc đã chuyển ứng dụng.',fullscreen:'Đã thoát chế độ toàn màn hình.',resize:'Kích thước vùng làm bài đã thay đổi.',zoom:'Vùng hiển thị hoặc mức thu phóng đã thay đổi.',orientation:'Hướng màn hình đã thay đổi.',leave:'Đã rời hoặc tải lại trang trong khi làm bài.',reload:'Trang đã được mở lại khi lượt làm trước chưa nộp.',storage:'Không thể tiếp tục lưu tiến độ trên trình duyệt.'};
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function isActive(){return !!state&&state.status==='active';}
+function storeState(){try{localStorage.setItem(KEY,JSON.stringify(state));return true;}catch(e){return false;}}
+function dimensions(){return {w:window.innerWidth,h:window.innerHeight,vw:window.visualViewport?.width??window.innerWidth,vh:window.visualViewport?.height??window.innerHeight,scale:window.visualViewport?.scale??1};}
+function grade(answers){return QUESTIONS.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);}
+function count(){return state.answers.filter(x=>Number.isInteger(x)&&x>=0&&x<4).length;}
+function mount(){
+ $('questions').innerHTML=QUESTIONS.map((q,i)=>`<section class="question" id="q${i}"><div class="qtop"><span class="qnum">Câu ${i+1}</span><span>${esc(q.topic)}</span></div><p class="stem">${esc(q.text)}</p><div class="options">${q.options.map((o,j)=>`<label class="option" id="opt${i}_${j}"><input type="radio" name="q${i}" value="${j}" data-q="${i}" aria-label="Câu ${i+1}, đáp án ${'ABCD'[j]}"><span class="letter">${'ABCD'[j]}.</span><span>${esc(o)}</span></label>`).join('')}</div><div class="explain" id="ex${i}" hidden></div></section>`).join('');
+ $('nav').innerHTML=QUESTIONS.map((q,i)=>`<button type="button" data-go="${i}" aria-label="Đi đến câu ${i+1}">${i+1}</button>`).join('');
+ $('answerForm').querySelectorAll('input').forEach(input=>{const i=Number(input.dataset.q),j=Number(input.value);input.checked=state.answers[i]===j;input.disabled=state.status==='done';});
+ $('entry').hidden=true;$('hero').hidden=true;$('exam').hidden=false;updateProgress();
+}
+function updateProgress(){
+ const n=count();$('answeredText').textContent=`Đã chọn ${n} / 40 câu`;$('progressBar').style.width=(n/40*100)+'%';
+ $('nav').querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('answered',state.answers[i]!==null);if(state.status==='done'){b.classList.toggle('good',state.answers[i]===QUESTIONS[i].answer);b.classList.toggle('bad',state.answers[i]!==QUESTIONS[i].answer);}});
+}
+function updateTime(){if(!isActive())return;const seconds=Math.max(0,Math.ceil((state.deadline-Date.now())/1000));$('timer').textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');$('timer').classList.toggle('urgent',seconds<=300);if(seconds===0)finish('timeout');}
+async function start(event){
+ event.preventDefault();if(starting||isActive())return;
+ if(!$('startForm').reportValidity())return;
+ const name=$('name').value.trim(),className=$('className').value.trim();
+ if(!name||!className){showError('Vui lòng nhập họ tên và lớp hợp lệ.');return;}
+ if(window.innerWidth<900||window.innerHeight<500){showError('Hãy dùng máy tính, mở rộng cửa sổ và đặt màn hình ngang trước khi bắt đầu.');return;}
+ if(!document.documentElement.requestFullscreen||document.fullscreenEnabled===false){showError('Trình duyệt chưa cho phép toàn màn hình. Hãy tải file, mở trực tiếp bằng Chrome hoặc Edge và thử lại.');return;}
+ try{localStorage.setItem(KEY+'-check','1');localStorage.removeItem(KEY+'-check');}catch(e){showError('Trình duyệt đang chặn lưu kết quả. Hãy cho phép lưu dữ liệu trang rồi thử lại.');return;}
+ starting=true;$('startBtn').disabled=true;$('error').hidden=true;
+ try{
+  await document.documentElement.requestFullscreen();
+  if(!document.fullscreenElement)throw new Error('fullscreen');
+  const now=Date.now();state={version:1,status:'active',name,className,studentId:$('studentId').value.trim(),startedAt:now,deadline:now+DURATION,answers:Array(40).fill(null),finishedAt:null,reason:null};
+  if(!storeState())throw new Error('storage');
+  mount();$('toolbar').hidden=false;$('person').textContent=name+' • '+className;
+  window.scrollTo(0,0);
+  await new Promise(resolve=>setTimeout(resolve,800));
+  if(!document.fullscreenElement){finish('fullscreen');return;}
+  if(document.hidden){finish('hidden');return;}
+  if(!document.hasFocus()){finish('blur');return;}
+  baseline=dimensions();armed=true;interval=setInterval(updateTime,500);updateTime();
+ }catch(e){
+  if(isActive()){finish('storage');}else{showError('Chưa thể bật toàn màn hình. Hãy cho phép toàn màn hình và thử lại.');if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
+ }finally{starting=false;$('startBtn').disabled=false;}
+}
+function showError(message){$('error').textContent=message;$('error').hidden=false;}
+function requestSubmit(){if(!isActive())return;returnFocus=document.activeElement;$('confirmText').textContent=`Bạn đã chọn ${count()}/40 câu. Còn ${40-count()} câu chưa chọn. Sau khi nộp, đáp án sẽ được khóa.`;$('confirm').hidden=false;$('cancel').focus();}
+function closeConfirm(){ $('confirm').hidden=true;returnFocus?.focus?.(); }
+function finish(reason){
+ if(!isActive())return;
+ armed=false;state.status='done';state.finishedAt=Date.now();state.reason=reason;state.correct=grade(state.answers);state.score=state.correct*.25;clearInterval(interval);storeState();
+ $('confirm').hidden=true;renderResult();
+ if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
+}
+function renderResult(){
+ mount();$('toolbar').hidden=true;$('result').hidden=false;$('submitSide').hidden=true;
+ const correct=grade(state.answers),answered=count();
+ $('score').textContent=(correct*.25).toLocaleString('vi-VN',{maximumFractionDigits:2});
+ $('resultTitle').textContent=state.reason==='manual'?'Đã nộp bài':'Bài đã được tự nộp';
+ $('resultPerson').textContent=state.name+' • Lớp '+state.className+(state.studentId?' • SBD '+state.studentId:'');
+ $('resultStats').textContent=`Đúng ${correct}/40 • Sai ${answered-correct} • Chưa chọn ${40-answered}`;
+ $('reason').textContent=reasons[state.reason]||'Lượt làm đã kết thúc.';
+ const fmt=t=>new Date(t).toLocaleString('vi-VN');
+ $('eventLog').textContent=`Bắt đầu: ${fmt(state.startedAt)}. Kết thúc: ${fmt(state.finishedAt)}. Mã lý do: ${state.reason}.`;
+ $('legend').textContent='Xanh nhạt: đúng. Đỏ nhạt: sai hoặc chưa chọn.';$('saveHint').textContent='Lượt làm đã kết thúc; các lựa chọn đã khóa.';
+ QUESTIONS.forEach((q,i)=>{
+  $('opt'+i+'_'+q.answer).classList.add('correct');
+  if(state.answers[i]!==null&&state.answers[i]!==q.answer)$('opt'+i+'_'+state.answers[i]).classList.add('wrong');
+  const ex=$('ex'+i);ex.hidden=false;ex.innerHTML=`<strong>Đáp án ${'ABCD'[q.answer]}.</strong> ${esc(q.explanation)}<br><span class="small">Bạn chọn: ${state.answers[i]===null?'Chưa trả lời':'ABCD'[state.answers[i]]}.</span>`;
+ });window.scrollTo(0,0);
+}
+function violate(reason){if(armed&&isActive())finish(reason);}
+function checkSize(kind='resize'){
+ if(!armed||!isActive()||!baseline)return;const d=dimensions();
+ if(Math.abs(d.w-baseline.w)>4||Math.abs(d.h-baseline.h)>4){finish('resize');return;}
+ if(Math.abs(d.vw-baseline.vw)>4||Math.abs(d.vh-baseline.vh)>4||Math.abs(d.scale-baseline.scale)>.01)finish(kind);
+}
+function restore(){
+ let raw;try{raw=localStorage.getItem(KEY);}catch(e){return;}
+ if(!raw)return;
+ try{
+  const saved=JSON.parse(raw);
+  if(saved.version!==1||!['active','done'].includes(saved.status)||!Array.isArray(saved.answers)||saved.answers.length!==40||!saved.answers.every(x=>x===null||Number.isInteger(x)&&x>=0&&x<4)||!Number.isFinite(saved.startedAt)||!Number.isFinite(saved.deadline)||typeof saved.name!=='string'||typeof saved.className!=='string')throw Error('invalid');
+  state=saved;
+  if(isActive())finish(Date.now()>=state.deadline?'timeout':'reload');else renderResult();
+ }catch(e){state=null;showError('Dữ liệu lượt làm trước không hợp lệ. Có thể bắt đầu một lượt ôn tập mới.');}
+}
+$('startForm').addEventListener('submit',start);
+$('answerForm').addEventListener('submit',e=>e.preventDefault());
+$('answerForm').addEventListener('change',e=>{
+ if(!isActive()||!armed||e.target.type!=='radio')return;const i=Number(e.target.dataset.q),j=Number(e.target.value);
+ if(!Number.isInteger(i)||i<0||i>=40||!Number.isInteger(j)||j<0||j>3)return;
+ state.answers[i]=j;updateProgress();if(!storeState())finish('storage');
+});
+$('nav').addEventListener('click',e=>{const b=e.target.closest('button[data-go]');if(b)$('q'+b.dataset.go).scrollIntoView({block:'start',behavior:'smooth'});});
+$('submitTop').addEventListener('click',requestSubmit);$('submitSide').addEventListener('click',requestSubmit);
+$('cancel').addEventListener('click',closeConfirm);$('confirmSubmit').addEventListener('click',()=>finish('manual'));
+$('confirm').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeConfirm();}if(e.key==='Tab'){e.preventDefault();(document.activeElement===$('cancel')?$('confirmSubmit'):$('cancel')).focus();}});
+$('download').addEventListener('click',()=>{
+ if(!state||state.status!=='done')return;
+ const report={exam:'Hóa học 12 – Chương 4 Polymer',school:'THPT Lê Hồng Phong',teacher:'Phan Ngọc Anh',student:{name:state.name,className:state.className,studentId:state.studentId},startedAt:new Date(state.startedAt).toISOString(),finishedAt:new Date(state.finishedAt).toISOString(),reason:state.reason,reasonText:reasons[state.reason],correct:grade(state.answers),score:grade(state.answers)*.25,total:40,answers:QUESTIONS.map((q,i)=>({question:i+1,selected:state.answers[i]===null?null:'ABCD'[state.answers[i]],correct:'ABCD'[q.answer]})),note:'Kết quả lưu cục bộ; file không có chữ ký xác thực máy chủ.'};
+ const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Ket_qua_Hoa12_Polymer.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+$('print').addEventListener('click',()=>{if(state?.status==='done')window.print();});
+$('newAttempt').addEventListener('click',()=>{if(isActive())return;try{localStorage.removeItem(KEY);}catch(e){}location.reload();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)violate('hidden');});
+window.addEventListener('blur',()=>violate('blur'));
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)violate('fullscreen');});
+window.addEventListener('resize',()=>checkSize('resize'));
+window.visualViewport?.addEventListener('resize',()=>checkSize('zoom'));
+window.addEventListener('orientationchange',()=>violate('orientation'));
+window.addEventListener('pagehide',()=>{if(isActive())finish('leave');});
+window.addEventListener('beforeunload',()=>{if(isActive())finish('leave');});
+window.addEventListener('storage',e=>{if(e.key===KEY&&isActive())finish('storage');});
+document.addEventListener('contextmenu',e=>{if(isActive())e.preventDefault();});
+document.addEventListener('keydown',e=>{if(!isActive())return;if((e.ctrlKey||e.metaKey)&&['p','s','u','+','-','=','0'].includes(e.key.toLowerCase()))e.preventDefault();});
+restore();
+</script></body></html>
